@@ -9,20 +9,20 @@
         const response = await axios.get('https://66aa0468613eced4eba734ec.mockapi.io/api/v1/cards');
         cards.value = response.data;
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
 
     onMounted(async () => {
-        await fetchCards()
+        await fetchCards();
     })
 </script>
 
 <template>
-    <section class="cards">
+    <section class="cards container">
         <h2 class="cards__breadcrumb">Photo Cards</h2>
         <div class="cards__container">
-            <div v-for="(card, index) in cards" :key="index" class="card__item">
+            <div v-for="(card, index) in cards" :key="index" class="card">
                 <div class="card__img">
                     <img :src="card.image" :alt="card.title">
                 </div>
@@ -37,14 +37,65 @@
 <style scoped lang="scss">
     .cards {
         &__container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0 15px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-gap: 20px;
         }
-        &__item {
-            
+        &__breadcrumb {
+            font-size: 25px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .card {
+            -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+            border-radius: 5px;
+            overflow: hidden;
+            &__img {
+                img {
+                    width: 100%;
+                    height: 100%;
+                    aspect-ratio: 3/2;
+                    object-fit: cover;
+                }
+            }
+            &__title {
+                padding: 10px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 14px;
+                font-weight: 600;
+            }
+        }
+    }
+    @media (max-width: 1199px) {
+        .cards {
+            &__container {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+    }
+    @media (max-width: 1024px) {
+        .cards {
+            &__container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    }
+    @media (max-width: 767px) {
+        .cards {
+            &__container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    }
+    @media (max-width: 480px) {
+        .cards {
+            &__container {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     }
 </style>

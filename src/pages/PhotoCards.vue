@@ -1,13 +1,17 @@
 <script setup>
     import { ref, onMounted } from 'vue'
     import axios from 'axios'
+    import Card from "../components/Card.vue"
+    import Loading from "../components/Loading.vue"
 
     const cards = ref([]);
+    const showLoading = ref(true);
 
     const fetchCards = async () => {
       try {
         const response = await axios.get('https://66aa0468613eced4eba734ec.mockapi.io/api/v1/cards');
         cards.value = response.data;
+        showLoading.value = false
       } catch (error) {
         console.error(error);
       }
@@ -19,23 +23,20 @@
 </script>
 
 <template>
+    <Loading v-if="showLoading" />
     <section class="cards container">
         <h2 class="cards__breadcrumb">Photo Cards</h2>
         <div class="cards__container">
             <div v-for="(card, index) in cards" :key="index" class="card">
-                <div class="card__img">
-                    <img :src="card.image" :alt="card.title">
-                </div>
-                <h3 class="card__title">
-                    {{ card.title }}
-                </h3>
+                <Card :card="card" />
             </div>
         </div>
     </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
     .cards {
+        padding-top: 65px;
         &__container {
             display: grid;
             grid-template-columns: repeat(6, 1fr);

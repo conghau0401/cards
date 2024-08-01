@@ -2,7 +2,15 @@
     width: 100%;
     max-width: 1270px;
     margin: 0 auto;
-    padding: 0 0.75rem;
+}
+
+.page {
+    min-height: 100vh;
+    padding: 100px 0 50px;
+    h1.page-title {
+        font-size: 30px;
+        font-weight: bold;
+    }
 }
 
 @media (max-width: 600px) {

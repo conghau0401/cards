@@ -34,7 +34,6 @@
             >
                 <Card 
                     :card="card" 
-                    @message="handleMessage"
                 />
             </div>
         </div>

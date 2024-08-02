@@ -10,6 +10,7 @@
                 <router-link to="./">
                     <img src="@/assets/images/logo.png" alt="">
                 </router-link>
+                <div class="header__logo--slogan">Hieu Tran</div>
             </div>
             <ul class="header__btn">
                 <li>
@@ -72,9 +73,19 @@
         z-index: 1;
         width: 100%;
         &__logo {
-            width: 80px;
+            display: flex;
+            align-items: center;
+            gap: 0 10px;
+            a {
+                display: block;
+                width: 80px;
+            }
             img {
                 width: 100%;
+            }
+            &--slogan {
+                color: white;
+                font-size: 16px;
             }
         }
         &__wrapper {

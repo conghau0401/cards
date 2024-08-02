@@ -19,7 +19,7 @@
 
     onMounted(async () => {
         await fetchCards();
-    })
+    });
 </script>
 
 <template>
@@ -27,8 +27,15 @@
     <section class="cards container">
         <h2 class="cards__breadcrumb">Photo Cards</h2>
         <div class="cards__container">
-            <div v-for="(card, index) in cards" :key="index" class="card">
-                <Card :card="card" />
+            <div 
+                v-for="(card, index) in cards" 
+                :key="index" 
+                class="card"
+            >
+                <Card 
+                    :card="card" 
+                    @message="handleMessage"
+                />
             </div>
         </div>
     </section>
